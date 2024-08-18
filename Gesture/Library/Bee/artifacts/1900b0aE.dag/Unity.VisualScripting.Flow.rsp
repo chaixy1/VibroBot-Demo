@@ -124,14 +124,14 @@
 -define:MODULE_PARTICLE_SYSTEM_EXISTS
 -define:CSHARP_7_OR_LATER
 -define:CSHARP_7_3_OR_NEWER
--r:"D:/SSR/Projects/VibroBot2024/Gesture/Gesture/Library/PackageCache/com.unity.collab-proxy@2.0.3/Lib/Editor/PlasticSCM/log4netPlastic.dll"
--r:"D:/SSR/Projects/VibroBot2024/Gesture/Gesture/Library/PackageCache/com.unity.collab-proxy@2.0.3/Lib/Editor/PlasticSCM/Unity.Plastic.Antlr3.Runtime.dll"
--r:"D:/SSR/Projects/VibroBot2024/Gesture/Gesture/Library/PackageCache/com.unity.collab-proxy@2.0.3/Lib/Editor/PlasticSCM/Unity.Plastic.Newtonsoft.Json.dll"
--r:"D:/SSR/Projects/VibroBot2024/Gesture/Gesture/Library/PackageCache/com.unity.collab-proxy@2.0.3/Lib/Editor/PlasticSCM/unityplastic.dll"
--r:"D:/SSR/Projects/VibroBot2024/Gesture/Gesture/Library/PackageCache/com.unity.visualscripting@1.8.0/Editor/VisualScripting.Core/Dependencies/DotNetZip/Unity.VisualScripting.IonicZip.dll"
--r:"D:/SSR/Projects/VibroBot2024/Gesture/Gesture/Library/PackageCache/com.unity.visualscripting@1.8.0/Editor/VisualScripting.Core/Dependencies/YamlDotNet/Unity.VisualScripting.YamlDotNet.dll"
--r:"D:/SSR/Projects/VibroBot2024/Gesture/Gesture/Library/PackageCache/com.unity.visualscripting@1.8.0/Editor/VisualScripting.Core/EditorAssetResources/Unity.VisualScripting.TextureAssets.dll"
--r:"D:/SSR/Projects/VibroBot2024/Gesture/Gesture/Library/PackageCache/com.unity.visualscripting@1.8.0/Runtime/VisualScripting.Flow/Dependencies/NCalc/Unity.VisualScripting.Antlr3.Runtime.dll"
+-r:"D:/SSR/Projects/VibroBot2024/Gesture/VibroBot-Demo/Gesture/Library/PackageCache/com.unity.collab-proxy@2.0.3/Lib/Editor/PlasticSCM/log4netPlastic.dll"
+-r:"D:/SSR/Projects/VibroBot2024/Gesture/VibroBot-Demo/Gesture/Library/PackageCache/com.unity.collab-proxy@2.0.3/Lib/Editor/PlasticSCM/Unity.Plastic.Antlr3.Runtime.dll"
+-r:"D:/SSR/Projects/VibroBot2024/Gesture/VibroBot-Demo/Gesture/Library/PackageCache/com.unity.collab-proxy@2.0.3/Lib/Editor/PlasticSCM/Unity.Plastic.Newtonsoft.Json.dll"
+-r:"D:/SSR/Projects/VibroBot2024/Gesture/VibroBot-Demo/Gesture/Library/PackageCache/com.unity.collab-proxy@2.0.3/Lib/Editor/PlasticSCM/unityplastic.dll"
+-r:"D:/SSR/Projects/VibroBot2024/Gesture/VibroBot-Demo/Gesture/Library/PackageCache/com.unity.visualscripting@1.8.0/Editor/VisualScripting.Core/Dependencies/DotNetZip/Unity.VisualScripting.IonicZip.dll"
+-r:"D:/SSR/Projects/VibroBot2024/Gesture/VibroBot-Demo/Gesture/Library/PackageCache/com.unity.visualscripting@1.8.0/Editor/VisualScripting.Core/Dependencies/YamlDotNet/Unity.VisualScripting.YamlDotNet.dll"
+-r:"D:/SSR/Projects/VibroBot2024/Gesture/VibroBot-Demo/Gesture/Library/PackageCache/com.unity.visualscripting@1.8.0/Editor/VisualScripting.Core/EditorAssetResources/Unity.VisualScripting.TextureAssets.dll"
+-r:"D:/SSR/Projects/VibroBot2024/Gesture/VibroBot-Demo/Gesture/Library/PackageCache/com.unity.visualscripting@1.8.0/Runtime/VisualScripting.Flow/Dependencies/NCalc/Unity.VisualScripting.Antlr3.Runtime.dll"
 -r:"D:/Unity Hub/Editor/2021.3.24f1c1/Editor/Data/Managed/UnityEditor.Graphs.dll"
 -r:"D:/Unity Hub/Editor/2021.3.24f1c1/Editor/Data/Managed/UnityEngine/UnityEditor.CoreModule.dll"
 -r:"D:/Unity Hub/Editor/2021.3.24f1c1/Editor/Data/Managed/UnityEngine/UnityEditor.DeviceSimulatorModule.dll"

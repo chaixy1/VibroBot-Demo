@@ -119,7 +119,7 @@
 -define:MANUS_STEAMVR
 -define:CSHARP_7_OR_LATER
 -define:CSHARP_7_3_OR_NEWER
--r:"D:/SSR/Projects/VibroBot2024/Gesture/Gesture/Library/PackageCache/com.unity.visualscripting@1.8.0/Runtime/VisualScripting.Flow/Dependencies/NCalc/Unity.VisualScripting.Antlr3.Runtime.dll"
+-r:"D:/SSR/Projects/VibroBot2024/Gesture/VibroBot-Demo/Gesture/Library/PackageCache/com.unity.visualscripting@1.8.0/Runtime/VisualScripting.Flow/Dependencies/NCalc/Unity.VisualScripting.Antlr3.Runtime.dll"
 -r:"D:/Unity Hub/Editor/2021.3.24f1c1/Editor/Data/Managed/UnityEngine/UnityEditor.CoreModule.dll"
 -r:"D:/Unity Hub/Editor/2021.3.24f1c1/Editor/Data/Managed/UnityEngine/UnityEditor.DeviceSimulatorModule.dll"
 -r:"D:/Unity Hub/Editor/2021.3.24f1c1/Editor/Data/Managed/UnityEngine/UnityEditor.DiagnosticsModule.dll"
