@@ -17,12 +17,35 @@ The VibroBot Gesture Guidance System is an innovative real-time gesture guidance
 - **MediaPipe Algorithm**: Calculates hand joint positions from captured images.
 
 ## Installation
-To install and set up the VibroBot Gesture Guidance System, follow these steps:
+To install and set up the VibroBot Gesture Guidance System, follow these steps carefully. Ensure you have Python and Unity installed on your system before proceeding.
+### Python Setup
+
 1. **Clone the Repository**
+   Open your terminal or command prompt and run:
+   ```bash
+   git clone https://github.com/chaixy1/VibroBot-Demo.git
 2. **Install Dependencies**
-- List all the dependencies required for the project.
+- Install Python 3.7 or later.
+- Install the following Python packages:
+  ```
+  pip install mediapipe
+  ```
+
+### Unity Setup
+
+1. **Unity Version**
+- Ensure you have Unity version 2021.3.24 or later installed.
+
+2. **Import the Unity Project**
+- Open Unity and create a new project.
+- In the Unity Editor, go to `Assets` > `Import Package` > `Custom Package`.
+- Navigate to the cloned repository and select the Unity project file to import.
+
 3. **Configure the System**
-- Provide instructions to configure the camera, network, and other components.
+- In the Unity Editor, open the `Gesture` or 'Grab' scene.
+- Ensure the camera component is properly configured to capture the necessary input.
+- Adjust any network or other system settings as required.
+
 
 ## Usage
 - **Start the System**: Run the main application to begin gesture capture and recognition.
