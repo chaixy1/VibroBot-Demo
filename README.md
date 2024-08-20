@@ -77,7 +77,7 @@ To perform a gesture demonstration using the Unity application, follow these ste
    - Within the Unity project, go to `Assets/Scenes` and open the `Gesture.unity` file.
    - Here is a screenshot of what you should see:
 
-  ![Gesture Scene Screenshot](**path-to-your-image**)
+  ![Gesture Scene Screenshot](VibroBot-Demo/Figures/gesture_demo.png)
 
 3. **Start the Demo**
    - Click the "Play" button in the Unity editor to enter the demo homepage.
