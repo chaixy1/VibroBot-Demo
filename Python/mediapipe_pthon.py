@@ -4,67 +4,66 @@ import socket
 import numpy as np
 import math
 
-# UDP 设置
+# UDP setup
+# This IP address is where the recognized finger bend angles are sent.
+# You can modify this to another location within the local network, 
+# but you also need to set up the receiver in Unity to match.
 udp_ip = "127.0.0.1"
 udp_port = 12333
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
-# MediaPipe 手部模型初始化
+# Initialize MediaPipe Hands model
 mp_hands = mp.solutions.hands
 hands = mp_hands.Hands()
 mp_drawing = mp.solutions.drawing_utils
 
-
-
-
-# 计算空间向量夹角
+# Function to calculate the angle between vectors in 3D space
 def calculate_angle(point_a, point_b, point_c):
-    # 创建向量 BA 和 BC
+    # Create vectors BA and BC
     ba = [point_a[i] - point_b[i] for i in range(3)]
     bc = [point_c[i] - point_b[i] for i in range(3)]
 
-    # 计算点积
+    # Calculate the dot product
     dot_product = sum(ba[i]*bc[i] for i in range(3))
 
-    # 计算向量的模
+    # Calculate the magnitude of the vectors
     magnitude_ba = math.sqrt(sum(ba[i]**2 for i in range(3)))
     magnitude_bc = math.sqrt(sum(bc[i]**2 for i in range(3)))
 
-    # 计算角度（弧度）
+    # Calculate the angle in radians
     angle = math.acos(dot_product / (magnitude_ba * magnitude_bc))
 
-    # 转换为度
+    # Convert to degrees
     angle_deg = angle * 180 / math.pi
 
     return angle_deg
 
-# 用于从 MediaPipe 数据中获取指定关键点坐标的函数
+# Function to get the coordinates of a specific landmark from MediaPipe data
 def get_landmark_coord(landmarks, idx):
     return np.array([landmarks[idx].x, landmarks[idx].y, landmarks[idx].z])
 
-
-# 打开摄像头
+# Open the webcam
 cap = cv2.VideoCapture(0)
 
 fps = cap.get(cv2.CAP_PROP_FPS)
-print(f"摄像头帧率: {fps}")
+print(f"Camera frame rate: {fps}")
 
 while cap.isOpened():
     success, image = cap.read()
     if not success:
         continue
 
-    # 处理图像
+    # Process the image
     image = cv2.cvtColor(cv2.flip(image, 1), cv2.COLOR_BGR2RGB)
     results = hands.process(image)
 
-    # 绘制手部关键点
+    # Draw hand landmarks
     image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
     if results.multi_hand_landmarks:
         for hand_landmarks in results.multi_hand_landmarks:
             mp_drawing.draw_landmarks(image, hand_landmarks, mp_hands.HAND_CONNECTIONS)
 
-            # 计算欧拉角
+            # Calculate Euler angles
             euler_angles = []
             for i in range(5):
                 for j in range(3):
@@ -80,14 +79,14 @@ while cap.isOpened():
                     angle = calculate_angle(point_a, point_b, point_c) - 180
                     euler_angles.append(angle)
 
-            # 发送数据
-            # 将数据转换为以逗号为间隔的字符串，保留六位小数
+            # Send data
+            # Convert data to a comma-separated string with six decimal places
             data_string = ','.join(['{:.6f}'.format(row) for row in euler_angles])
             message = data_string
             print(message)
             sock.sendto(message.encode(), (udp_ip, udp_port))
 
-    # 显示图像
+    # Display the image
     cv2.imshow('MediaPipe Hands', image)
     if cv2.waitKey(5) & 0xFF == 27:
         break

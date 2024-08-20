@@ -11,20 +11,18 @@ using System.Collections.Generic;
 
 public class UDPManager : MonoBehaviour
 {
-    public GameObject gesture;
-    public GrabCheck grabCheck;
     public Text gestureText;
     public GameObject isChecking;
 
-    public Dropdown gestureDropdown; // 添加一个Dropdown UI 元素用于选择手势
-    public Button compareButton; // 添加一个Button UI 元素用于触发比较
+    public Dropdown gestureDropdown; 
+    public Button compareButton; 
     public Button uncompareButton;
 
     public static string[] latestRecvStr;
     private string recvStr;
 
-    private string UDPClientAddRess = "127.0.0.1"; //目标服务器地址
-    private int UDPClientPort = 12333; //目标服务器端口号
+    private string UDPClientAddRess = "127.0.0.1"; //Target server address
+    private int UDPClientPort = 12333; //Target server-side slogan
     Socket socket;
     EndPoint serverEnd;
     IPEndPoint ipEnd;
@@ -34,13 +32,13 @@ public class UDPManager : MonoBehaviour
 
     byte[] sendData = new byte[1024];
 
-    private float[][] gestures; // 预存的8种手势数据
-    private int[] gestureRecognitionCount = new int[8]; // 每种手势的识别次数
+    private float[][] gestures; 
+    private int[] gestureRecognitionCount = new int[8];
 
-    private int selectedGestureIndex = 0; // 存储选择的手势索引
+    private int selectedGestureIndex = 0;
     private bool isComparing = false;
 
-    public Text[] differenceTexts; // 存储15个差距文本的引用
+    public Text[] differenceTexts; //Stores 15 references to gap text
     public volatile float[] differenceFloats = new float[15];
 
     Color orangeColor = new Color(1.0f, 0.5f, 0.0f, 1.0f);
@@ -49,26 +47,27 @@ public class UDPManager : MonoBehaviour
     {
         Application.targetFrameRate = 30;
 
+        //Pre-saved gestures
         gestures = new float[8][]
         {
-            new float[15] {23.2f,10.9f,27.2f,23.9f,35.7f,79.3f,14.6f,70.4f,66.4f,8.1f,69.4f,80.2f,6.8f,44.0f,100.3f}, //Grab
-            new float[15] {30.8f,8.6f,19.1f,100.0f,71.8f,53.3f,102.6f,76.3f,56.7f,100.7f,78.3f,60.5f,92.6f,79.8f,64.9f},//Fist 
+            new float[15] {23.2f,10.9f,27.2f,23.9f,35.7f,79.3f,14.6f,70.4f,66.4f,8.1f,69.4f,80.2f,6.8f,44.0f,100.3f},
+            new float[15] {30.8f,8.6f,19.1f,100.0f,71.8f,53.3f,102.6f,76.3f,56.7f,100.7f,78.3f,60.5f,92.6f,79.8f,64.9f},
             new float[15] {34.7f,17.8f,46.5f,15.6f,5.5f,4.5f,44.8f,116.2f,15.7f,61.2f,115.2f,20.0f,57.6f,121.6f,18.2f},
             new float[15] {32.4f, 31.3f, 27.2f, 12.4f, 2.9f, 5.6f, 15.5f, 1.5f, 7.8f, 42.1f, 118.9f, 17.5f, 46.8f, 114.6f, 14.6f},
             new float[15] {42.0f, 2.7f, 16.6f, 11.3f, 5.1f, 2.9f, 41.5f, 124.2f, 15.5f, 47.3f, 124.8f, 17.3f, 12.1f, 15.8f, 9.6f},
             new float[15] {32.7f, 6.2f, 5.8f, 16.3f, 5.9f, 2.8f, 11.8f, 8.1f, 1.4f, 3.9f, 4.9f, 2.1f, 5.0f, 2.9f, 6.3f},
             new float[15] {39.0f, 6.7f, 6.2f, 94.7f, 59.2f, 11.4f, 109.8f, 52.9f, 11.6f, 109.3f, 52.5f, 14.8f, 22.8f, 14.7f, 13.9f},
-            new float[15] {34.4f, 6.9f, 28.0f, 25.8f, 66.5f, 48.7f, 7.7f, 2.2f, 3.8f, 5.3f, 3.2f, 4.9f, 7.5f, 6.7f, 5.2f } // 手势8
+            new float[15] {34.4f, 6.9f, 28.0f, 25.8f, 66.5f, 48.7f, 7.7f, 2.2f, 3.8f, 5.3f, 3.2f, 4.9f, 7.5f, 6.7f, 5.2f }
         };
 
-        // 初始化Dropdown的选项
+        //Options for initializing Dropdown
         gestureDropdown.ClearOptions();
         gestureDropdown.AddOptions(new List<string>(gestureNames));
 
-        // 添加Dropdown选项变化的监听器
+        //Adding a listener for Dropdown option changes
         gestureDropdown.onValueChanged.AddListener(OnGestureDropdownValueChanged);
 
-        // 添加Button点击事件监听器
+        //Add Button Click Event Listener
         compareButton.onClick.AddListener(OnCompareButtonClick);
         uncompareButton.onClick.AddListener(OnUncompareButtonClick);
 
@@ -84,11 +83,10 @@ public class UDPManager : MonoBehaviour
 
     void Update()
     {
-        if (isComparing) // 如果正在进行手势比较
+        if (isComparing) // If a gesture comparison is being performed
         {
             isChecking.SetActive(true);
 
-            // 手势比较逻辑
             if (latestRecvStr == null || latestRecvStr.Length != 15)
                 return;
 
@@ -96,7 +94,7 @@ public class UDPManager : MonoBehaviour
 
             for (int i = 0; i < gestures.Length; i++)
             {
-                if (i == selectedGestureIndex) // 仅与选定的手势进行比较
+                if (i == selectedGestureIndex) // Comparison with selected gestures only
                 {
                     if (CompareArrays(latestRecvStr, gestures[i], 20f))
                     {
@@ -145,7 +143,7 @@ public class UDPManager : MonoBehaviour
     private void OnUncompareButtonClick()
     {
         isComparing = false;
-        for (int i = 0; i < differenceTexts.Length ; i++)
+        for (int i = 0; i < differenceTexts.Length; i++)
         {
             differenceTexts[i].text = "";
         }
@@ -180,7 +178,7 @@ public class UDPManager : MonoBehaviour
                     differenceTexts[i].color = Color.red;
                     count--;
                 }
-                else if (Mathf.Abs(-latestValue - presetArray[i])>10f)
+                else if (Mathf.Abs(-latestValue - presetArray[i]) > 10f)
                 {
                     differenceTexts[i].color = Color.yellow;
                 }
@@ -197,11 +195,11 @@ public class UDPManager : MonoBehaviour
 
         isChanging = 0;
 
-        return count > 12; 
+        return count > 12;
     }
 
     /// <summary>
-    /// 想服务器发送数据
+    /// Send data to server
     /// </summary>
     /// <param name="message"></param>
     public void InitSocket(string message)
@@ -210,30 +208,29 @@ public class UDPManager : MonoBehaviour
         UDPClientAddRess = UDPClientAddRess.Trim();
         ipEnd = new IPEndPoint(IPAddress.Parse(UDPClientAddRess), UDPClientPort);
         socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
-        socket.Bind(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 12333));//绑定端口号和IP
+        socket.Bind(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 12333));//Binding port number and IP
         IPEndPoint sender = new IPEndPoint(IPAddress.Any, 0);
         serverEnd = sender;
-        Debug.Log("等待链接");
+        Debug.Log("Waiting for links");
         SocketSend(message);
-        Debug.Log("连接成功");
+        Debug.Log("Connection successful");
         connectThread = new Thread(new ThreadStart(SocketReceve));
         connectThread.Start();
     }
+
     /// <summary>
-    /// 想服务端发送需要发送的内容
+    /// Send the server what needs to be sent
     /// </summary>
     /// <param name="sendMessage"></param>
     public void SocketSend(string sendMessage)
     {
-        //首先清空所有
         sendData = new byte[1024];
-        //转换数据
         sendData = Encoding.UTF8.GetBytes(sendMessage);
-        //将数据发送到服务端
         socket.SendTo(sendData, sendData.Length, SocketFlags.None, ipEnd);
     }
+
     /// <summary>
-    /// 接收来自服务端的消息
+    /// Receiving messages from the server
     /// </summary>
     void SocketReceve()
     {
@@ -246,19 +243,19 @@ public class UDPManager : MonoBehaviour
             }
             catch (System.Exception e)
             {
-                Debug.LogError("出现异常，异常信息：" + e);
+                Debug.LogError("An exception occurs and the exception message：" + e);
             }
             if (recvLen > 0)
             {
                 recvStr = Encoding.UTF8.GetString(recvData, 0, recvLen);
 
-                latestRecvStr = recvStr.Split(','); // 更新最新接收到的字符串
+                latestRecvStr = recvStr.Split(','); //Update the latest received string
 
                 string arrayContent = string.Join(", ", latestRecvStr);
             }
             else
             {
-                Debug.LogError("出现错误,请检查网络链接是否正常");
+                Debug.LogError("There is an error, please check if the network link is normal.");
             }
         }
     }
@@ -275,21 +272,24 @@ public class UDPManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 关闭与服务器的连接
+    /// Close the connection to the server
     /// </summary>
     public void SocketQuit()
     {
-        //如果线程还在就需要关闭线程
-        Debug.Log("销毁UDP");
+        //You need to close the thread if it's still there.
+        Debug.Log("Destroy UDP");
         if (connectThread != null)
         {
             connectThread.Interrupt();
             connectThread.Abort();
         }
-        //最后关闭socket
+        //Close socket
         if (socket != null)
         {
             socket.Close();
         }
     }
 }
+
+
+
