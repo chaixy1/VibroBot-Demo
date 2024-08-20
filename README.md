@@ -48,9 +48,23 @@ To install and set up the VibroBot Gesture Guidance System, follow these steps c
 
 
 ## Usage
-- **Start the System**: Run the main application to begin gesture capture and recognition.
-- **Wear VibroBots**: Equip the VibroBots on each finger as instructed.
-- **Perform Gestures**: Follow the virtual scene's feedback to adjust and perfect your gestures.
+Follow these steps to use the VibroBot Gesture Guidance System effectively.
+### Start the System
+1. **Run the Main Application**
+   - Navigate to the `VibroBot-Demo/Python` directory.
+   - Execute the main Python script to begin gesture capture and recognition:
+     ```bash
+     python mediapipe_python.py
+     ```
+   - Ensure that the script is configured with the correct network settings for your environment.
+
+2. **Configure Network Settings**
+   - By default, the script uses the following network settings:
+     ```python
+     udp_ip = "127.0.0.1"
+     udp_port = 12333
+     ```
+   - Modify the `udp_ip` and `udp_port` variables in the script to match your network's IP address and desired port.
 
 ## Experiments and Results
 Our experiments have shown that the VibroBot system significantly enhances the ability of participants with limited vision to perform standard grab actions. The system provides continuous haptic guidance until the successful grab is achieved, as defined by the criteria of 80% or more joint angles within an acceptable error range.
