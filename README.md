@@ -129,12 +129,6 @@ Follow these steps to perform the Grab demo using the Unity application:
 6. **Restart the Demo**
    - To perform the demo again, click the `restart` button to reset the scene and begin a new attempt.
 
-## Experiments and Results
-Our experiments have shown that the VibroBot system significantly enhances the ability of participants with limited vision to perform standard grab actions. The system provides continuous haptic guidance until the successful grab is achieved, as defined by the criteria of 80% or more joint angles within an acceptable error range.
-
-## Contributing
-We welcome contributions to the VibroBot Gesture Guidance System. Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
-
 ## License
 This project is licensed under the [LICENSE NAME] - see the [LICENSE](LICENSE) file for details.
 
