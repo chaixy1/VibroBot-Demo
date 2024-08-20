@@ -135,8 +135,6 @@ For a step-by-step video guide on setting up and using VibroBot, please watch th
 
 [Watch the setup and usage tutorial on YouTube](https://www.youtube.com/watch?v=6eU5iwbdGzk&t=22s)
 
-<a href="https://www.youtube.com/watch?v=6eU5iwbdGzk" target="_blank"><img src="https://img.youtube.com/vi/VIDEO_ID/0.jpg" alt="Video Tutorial" width="240" height="135"/></a>
-
 ## License
 This project is licensed under the [LICENSE NAME] - see the [LICENSE](LICENSE) file for details.
 
