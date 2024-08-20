@@ -66,6 +66,31 @@ Follow these steps to use the VibroBot Gesture Guidance System effectively.
      ```
    - Modify the `udp_ip` and `udp_port` variables in the script to match your network's IP address and desired port.
 
+### Gesture Demo
+
+To perform a gesture demonstration using the Unity application, follow these steps:
+
+1. **Open Unity Hub and Import the Gesture Project**
+   - Launch Unity Hub and add the Gesture project by navigating to the directory where you have cloned or downloaded the VibroBot Gesture Guidance System.
+
+2. **Open the Gesture Scene**
+   - Within the Unity project, go to `Assets/Scenes` and open the `Gesture.unity` file.
+
+3. **Start the Demo**
+   - Click the "Play" button in the Unity editor to enter the demo homepage.
+
+4. **Select the Gesture to Guide**
+   - Use the interface to choose the gesture you want to demonstrate.
+
+5. **Begin the Gesture Demonstration**
+   - After selecting the gesture, click "Begin" to start the demonstration.
+
+6. **View Comparison Results**
+   - Observe the comparison results displayed in real-time as you perform the gesture.
+
+7. **Analyze Finger Error**
+   - Check the error for each finger, which will be shown on the side of the interface, to understand which adjustments may be needed.
+
 ## Experiments and Results
 Our experiments have shown that the VibroBot system significantly enhances the ability of participants with limited vision to perform standard grab actions. The system provides continuous haptic guidance until the successful grab is achieved, as defined by the criteria of 80% or more joint angles within an acceptable error range.
 
