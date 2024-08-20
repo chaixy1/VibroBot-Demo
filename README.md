@@ -124,6 +124,8 @@ Follow these steps to perform the Grab demo using the Unity application:
      - **Grab**: The gesture was successfully recognized as a grasp.
      - **Overgrab**: The gesture was too forceful or excessive.
 
+   ![Image text](https://github.com/chaixy1/VibroBot-Demo/blob/main/Figures/grab_demo.png)
+
 6. **Restart the Demo**
    - To perform the demo again, click the `restart` button to reset the scene and begin a new attempt.
 
