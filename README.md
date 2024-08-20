@@ -78,9 +78,6 @@ To perform a gesture demonstration using the Unity application, follow these ste
    - Here is a screenshot of what you should see:
    
    ![Image text](https://github.com/chaixy1/VibroBot-Demo/blob/main/Figures/gesture_demo.png)
-   <p style="text-align: center;">
-       <img src="https://github.com/chaixy1/VibroBot-Demo/blob/main/Figures/gesture_demo.png" width="500" height="auto" alt="GitHub" style="display: inline-block;"/>
-   </p>
 
 4. **Start the Demo**
    - Click the "Play" button in the Unity editor to enter the demo homepage.
