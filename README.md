@@ -100,6 +100,33 @@ To perform a gesture demonstration using the Unity application, follow these ste
 7. **Analyze Finger Error**
    - Check the error for each finger, which will be shown on the side of the interface, to understand which adjustments may be needed.
 
+### Grab Demo
+
+Follow these steps to perform the Grab demo using the Unity application:
+
+1. **Import the Grab Scene in Unity Hub**
+   - Launch Unity Hub and open the project containing the Grab demo.
+   - Navigate to the `Assets/Scenes` directory and select the `Grab.unity` file.
+
+2. **Open and Run the Grab Scene**
+   - Double-click on `Grab.unity` to open the scene in the Unity editor.
+   - Press the "Play" button to start the Grab demo.
+
+3. **Perform the Grasping Gesture**
+   - Position your hand in front of the camera and perform the grasping gesture.
+
+4. **Evaluate the Gesture**
+   - After performing the gesture, click the `checkbutton` to receive feedback on your grasp.
+
+5. **Interpret the Results**
+   - The system will indicate one of three states based on your gesture:
+     - **Ungrab**: The gesture was not recognized as a grasp.
+     - **Grab**: The gesture was successfully recognized as a grasp.
+     - **Overgrab**: The gesture was too forceful or excessive.
+
+6. **Restart the Demo**
+   - To perform the demo again, click the `restart` button to reset the scene and begin a new attempt.
+
 ## Experiments and Results
 Our experiments have shown that the VibroBot system significantly enhances the ability of participants with limited vision to perform standard grab actions. The system provides continuous haptic guidance until the successful grab is achieved, as defined by the criteria of 80% or more joint angles within an acceptable error range.
 
