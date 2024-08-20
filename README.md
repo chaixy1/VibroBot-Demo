@@ -129,6 +129,15 @@ Follow these steps to perform the Grab demo using the Unity application:
 6. **Restart the Demo**
    - To perform the demo again, click the `restart` button to reset the scene and begin a new attempt.
 
+## Video Tutorial
+
+For a step-by-step video guide on setting up and using VibroBot, please watch the tutorial below:
+
+[Embed the YouTube video here using the following format]
+
+```markdown
+<a href="https://www.youtube.com/watch?v=6eU5iwbdGzk" target="_blank"><img src="https://img.youtube.com/vi/VIDEO_ID/0.jpg" alt="Video Tutorial" width="240" height="135"/></a>
+
 ## License
 This project is licensed under the [LICENSE NAME] - see the [LICENSE](LICENSE) file for details.
 
