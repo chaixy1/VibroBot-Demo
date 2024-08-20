@@ -16,7 +16,7 @@ The VibroBot Gesture Guidance System is an innovative real-time gesture guidance
 - **VibroBots**: Wearable devices that vibrate to guide finger positioning.
 - **MediaPipe Algorithm**: Calculates hand joint positions from captured images.
 
-## Installation
+## :hammer_and_wrench: Installation
 To install and set up the VibroBot Gesture Guidance System, follow these steps carefully. Ensure you have Python and Unity installed on your system before proceeding.
 ### Python Setup
 
