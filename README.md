@@ -78,26 +78,27 @@ To perform a gesture demonstration using the Unity application, follow these ste
    - Here is a screenshot of what you should see:
    
    ![Image text](https://github.com/chaixy1/VibroBot-Demo/blob/main/Figures/gesture_demo.png)
+   <img src="https://raw.githubusercontent.com/hongmaju/light7Local/master/img/productShow/20170518152848.png" width="100" height="auto" />
 
-3. **Start the Demo**
+4. **Start the Demo**
    - Click the "Play" button in the Unity editor to enter the demo homepage.
 
-4. **Select the Gesture to Guide**
+5. **Select the Gesture to Guide**
    - Use the interface to choose the gesture you want to demonstrate.
 
    ![Image text](https://github.com/chaixy1/VibroBot-Demo/blob/main/Figures/gesture_demo2.png)
 
-5. **Begin the Gesture Demonstration**
+6. **Begin the Gesture Demonstration**
    - After selecting the gesture, click "Begin" to start the demonstration.
 
    ![Image text](https://github.com/chaixy1/VibroBot-Demo/blob/main/Figures/gesture_demo3.png)
 
-6. **View Comparison Results**
+7. **View Comparison Results**
    - Observe the comparison results displayed in real-time as you perform the gesture.
 
    ![Image text](https://github.com/chaixy1/VibroBot-Demo/blob/main/Figures/gesture_demo4.png)
 
-7. **Analyze Finger Error**
+8. **Analyze Finger Error**
    - Check the error for each finger, which will be shown on the side of the interface, to understand which adjustments may be needed.
 
 ### Grab Demo
