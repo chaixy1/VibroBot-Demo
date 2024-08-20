@@ -21,7 +21,7 @@ To install and set up the VibroBot Gesture Guidance System, follow these steps c
 ### Python Setup
 
 1. **Clone the Repository**
-   Open your terminal or command prompt and run:
+- Open your terminal or command prompt and run:
    ```bash
    git clone https://github.com/chaixy1/VibroBot-Demo.git
 2. **Install Dependencies**
@@ -42,7 +42,7 @@ To install and set up the VibroBot Gesture Guidance System, follow these steps c
 - Navigate to the cloned repository and select the Unity project file to import.
 
 3. **Configure the System**
-- In the Unity Editor, open the `Gesture` or 'Grab' scene.
+- In the Unity Editor, open the `Gesture` or `Grab` scene.
 - Ensure the camera component is properly configured to capture the necessary input.
 - Adjust any network or other system settings as required.
 
