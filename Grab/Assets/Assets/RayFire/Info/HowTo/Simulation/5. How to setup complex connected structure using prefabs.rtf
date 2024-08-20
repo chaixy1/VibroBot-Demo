@@ -1,0 +1,60 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat{\fonttbl{\f0\fswiss\fcharset0 Calibri;}{\f1\fswiss\fcharset204 Calibri;}}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\nowidctlpar\ri-498\sl276\slmult1\qc\ul\b\f0\fs52\lang9 How to setup complex connected structure using prefabs\ulnone\b0\fs22\par
+
+\pard\nowidctlpar\ri-498\sl276\slmult1\par
+In this How To you can learn how to use prefabs in complex connected structures using RigidRoot component. Rigid component with MeshRoot object type can only manage simulation of its Mesh objects (objects with MeshFilter component ) children and it is not suitable for complex simulations which may involve hundreds of fragments and several prefabs. In such cases, it is better to use RigidRoot which can have not only Mesh objects as its children, but other roots with Mesh objects. This makes complex setups much easier and faster to manage, since these roots can be Prefabs with fragments.\par
+\par
+
+\pard 
+{\pntext\f0 1.\tab}{\*\pn\pnlvlbody\pnf0\pnindent0\pnstart1\pndec{\pntxta.}}
+\nowidctlpar\fi-426\li852\ri-498\sl276\slmult1 Create \b Cube\b0 , this will be a ground cube that will be used for collisions.\line\par
+{\pntext\f0 2.\tab}Set its \b name \b0 to "\i Ground\i0 ", \b position \b0 to [0,0,0] and \b scale \b0 to [20, 1, 20]\line\par
+{\pntext\f0 3.\tab}Create \b Cube\b0 , set its name to "\i Slab\i0 ", \b position \b0 to [-3, 2.5, 3] and \b scale \b0 to [3, 0.1, 3]\line\par
+{\pntext\f0 4.\tab}Add RayFire Shatter component to "\i Slab\i0 ", set amout to 100 and click on Fragment button. \line\line Slab_root object with fragments will be created. Now we need to save it as prefab. In order to do this, we first need to export fragments meshes into an asset file.\line\par
+{\pntext\f0 5.\tab}At the bottom of RayFire Shatter component click on Export Last Fragments button and Save asset in Assets folder.\line\tab\par
+{\pntext\f0 6.\tab}Now select Slab_root object in the Hierarchy and drag it to the Project tab into the Assets folder to create Prefab.\line\par
+{\pntext\f0 7.\tab}Destroy "Slab" object.\line\par
+{\pntext\f0 8.\tab}Create Cube, set its name to "Pillar", position to [-4, 1.5, 4] and scale to \line [0.2, 2, 0.8]\line\par
+{\pntext\f0 9.\tab}Add RayFire Shatter component to "Pillar", set amout to 50 and click on Fragment button. \line\par
+{\pntext\f0 10.\tab}Export Last Fragments and create Prefab for Pillar_root object like in steps 5 and 6, then destroy Pillar object.\lang1033\line\par
+{\pntext\f0 11.\tab}Create Empty game object, set is name to "Structure" and position to [-1, 0, 1]\line\par
+{\pntext\f0 12.\tab}Set it as parent for Slab_root and Pillar_root objects.\line\line Now we need to duplicate and move these prefabs to create complex structure.\line\par
+{\pntext\f0 13.\tab}Duplicate Slab_root object, set position for new object to [1, 2.5, 2] and rotation to [0, 90, 0]\line\par
+{\pntext\f0 14.\tab}Duplicate Slab_root object again, set position for new object to [-2, 2.5, -1] and rotation to [0,-90,0]\line\par
+{\pntext\f0 15.\tab}Duplicate Pillar_root object, set position for new object to [-3, 1.5, 0.5]\line\par
+{\pntext\f0 16.\tab}Duplicate Pillar_root object, set position for new object to [-3, 1.5, -2]\line\par
+{\pntext\f0 17.\tab}Duplicate Pillar_root object, set position for new object to [-1, 1.5, 3]\line\par
+{\pntext\f0 18.\tab}Duplicate Pillar_root object, set position for new object to [2, 1.5, 3]\line\par
+{\pntext\f0 19.\tab}Duplicate Pillar_root object, set position for new object to [-1, 1.5, 0.5]\line\par
+{\pntext\f0 20.\tab}Duplicate Pillar_root object, set position for new object to [2, 1.5, 1]\line\par
+{\pntext\f0 21.\tab}Duplicate Pillar_root object, set position for new object to [-0.5, 1.5, 3.2] and rotation to [0, 90, 0]\line\par
+{\pntext\f0 22.\tab}Duplicate Pillar_root object, set position for new object to [-0.5, 1.5, 1] and rotation to [0, 90, 0]\line\line So, we finally create one floor of our structure. Now let's duplicate the whole floor and create a few more floors.\line\par
+{\pntext\f0 23.\tab}Select all Structure children objects, duplicate selection and move it so bottom fragments of duplicated Pillars will be slightly upper than Slab_root objects and there will be very small gap between them.\line\line Now we finally finished with creating complex structure using two different prefabs and can start setup RigidRoot and other RayFire components. \line\par
+{\pntext\f0 24.\tab}Select Structure object, add RayFire RigidRoot component and set Simulation Type to Inactive.\line\line First, let's solve any possible simulation issues we may have.\line\par
+{\pntext\f0 25.\tab}Start Play Mode.\line\line You may notice that some fragments move and rotate immediately after the simulation starts. This happens because some of them interpenetrate with each other, so their colliders interpenetrate as well.\line\line To fix this, we can make such fragments ignore each other. This obviously reduces simulation accuracy, but it is the cost of stable simulation.If you do not want interpenetrated fragments to ignore each other, you should model your structure in such a way that there won't be interpenetration. In this howto such interpenetration were made on purpose to show you how to fix them.\line\par
+{\pntext\f0 26.\tab}\lang9 Turn Off Play Mode. \lang1033\line\par
+{\pntext\f0 27.\tab}Select Structure object and in its RayFire RigidRoot component Physics properties enable Ignore Near property.\line\par
+{\pntext\f0 28.\tab}Start Play Mode.\line\line Now all fragments do not move and rotate at start and we can setup Collapse for this tructure.\line\par
+{\pntext\f0 29.\tab}\lang9 Turn Off Play Mode. \lang1033\line\par
+{\pntext\f0 30.\tab}Select Structure object, add RayFire Connectivity component and set Type to By Bounding Box and Polygons. This connectivity type will establish connections among fragments based on their matching shared surfaces to set the correct shared area size and then create connections for the rest of the fragments based on their overlapping Bounding Boxes to create connections among different prefab because their fragments do not have matching surfaces.\line\par
+{\pntext\f0 31.\tab}Under Connectivity Type property set Expand value to 0.05. This property increase fragments bounding box size to make sure they will overlap in case there is some gap between fragments.\line\par
+{\pntext\f0 32.\tab}In RigidRoot component Activation properties enable Connectivity checkbox so fragments will be possible to activate by Connectivity when they will lose connection with any of Unyielding fragments.\line\par
+{\pntext\f0 33.\tab}In Activation properties set Offset property value to 0.1 so some fragments will be activated if they are pushed far enough by already activated fragments.\line\par
+{\pntext\f0 34.\tab}Select Structure object, add RayFire Unyielding component, set Size to [10, 1, 10] and Center to [0, 1, 0] \line\line Now when you will start Play Mode Connectivity component will establish connections among all fragments to activate fragments which will not be connected to any of fragments defined as Unyielding by Unyielding component gizmo, this allows to avoid fragments frozen in air without any support. \line\line Structure is ready to be demolished, you can shoot, explode or throw some heavy objects to it to demolish. But lets use Connectivity component Collapse feature. Collapse allows to activate (turn to dynamic) fragments and remove their connections with other fragments. \line\line It is possible to instantly activate fragment and destroy all its connections using By Size or Random collapse types or destroy only connections using By Area collapse type, so when fragment will be activated when it lose all its connections with other fragments.\line\par
+{\pntext\f0 35.\tab}In Connectivity component under Collapse proeprties set Initiate to At Start\line\par
+{\pntext\f0 36.\tab}Open Collapse Properties, set Type to By Area, Start to 0 and End to 50. This value means that Collapse will start to destroy connections among fragments with smallest shared surface area and when it will stop 50% of connections with the smallest area will be destroyed.\line\par
+{\pntext\f0 37.\tab}Set Steps to 30 and Duration to 15. This mean that whol collapse will take 15 seconds and it will perform 30 steps to destroy 50% connections slowly increase Area threshold with every step so more and more connection will be destroyed each step.\line\par
+{\pntext\f0 38.\tab}Start Play Mode.\line\line You may notice that every Pillar has the same collapse pattern, at every step the same fragments activates on every Pillar. This happens because every Pillar has the same fragments with the same shared area. To fix this we need to add some variation.\line\par
+{\pntext\f0 39.\tab}\lang9 Turn Off Play Mode. \lang1033\line\par
+{\pntext\f0 40.\tab}In Collapse properties set Variation to 50. This property very useful if you have duplicated prefabs in your structure or if you have several of the same structures and you want to get slightly a different collapse pattern for every structure.\line\par
+{\pntext\f0 41.\tab}Start Play Mode.\line\line Now collapse of very Pillar and Slab is slightly different. But still it is better to have at least two different prefabs fragmented by Shatter with different seed so it won't be noticeable that all prefabs has the same fragmentation pattern. \line\par
+{\pntext\f0 42.\tab}\lang9 Turn Off Play Mode. \lang1033\line\line With a high number of connections, it is hard to see sometimes collapse simulation so you can disable connections preview in Connectivity.\line\par
+{\pntext\f0 43.\tab}In Connectivity component toggle Off Show Connections and Show Nodes buttons.\line\line We finished with our Structure setup, but every time we start Play Mode Connectivity component has to establish connections among fragments every time and RigidRoot has to add Mesh Colliders, set physical materials to fragments and define ignore pairs for colliders.\line\line Depends on amount of fragments this process can be pretty resourceful, in order to avoid making such calculations every time you can perform them just once in Editor so all necessary data will be cached in Connectivity and stored in Prefab. In this way, you can instantiate whole structure in runtime and it will not make all these resourceful calculations so there won't be FPS drop. \line\par
+{\pntext\f0 44.\tab}Select Structure object and in RayFire RigidRoot component click on Editor Setup button on top.\line\line After this you will see amount of shards under the button. It is better to use Editor Setup only after you finished with tuning all properties because Editor Setup cache a lot of physical and connection properties so they won't be calculated in runtime, if you will change some properties after this they won't be used because cached data will be used. \line\line So, if you decide to change some properties later, it is better to click on Reset Setup button on top first, change properties and then click on Editor Setup again.\line\line Now after all data is cached you can save whole structure in prefab, so later when you will instantiate Structure prefab \f1\lang1049 i\f0\lang1033 n Runtime it will only need to add objects in simulation and use already cached data.\line\par
+{\pntext\f0 45.\tab}\lang9 Select Structure object in the Hierarchy and drag it to the Project tab into the Assets folder to create a Prefab.\line\lang1033\line\par
+
+\pard\nowidctlpar\ri-498\sl276\slmult1\lang9\par
+\tab\line\line\line\fs24\lang1033\par
+}
+ 

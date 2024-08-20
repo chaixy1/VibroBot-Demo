@@ -1,0 +1,180 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat{\fonttbl{\f0\fswiss\fcharset0 Calibri;}{\f1\fmodern Consolas;}{\f2\fmodern\fcharset0 Consolas;}{\f3\fnil\fcharset2 Symbol;}}
+{\colortbl ;\red0\green0\blue255;\red108\green149\blue235;\red189\green189\blue189;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\nowidctlpar\sl276\slmult1\qc\ul\b\f0\fs52\lang9 RayFire Dust\ulnone\b0\fs24\lang1033\par
+
+\pard\nowidctlpar\sl276\slmult1\par
+\fs22\lang9 RayFire Dust component creates dust using native Unity particle system and predefined dust material reference.  You can create dust on object \b Demolition\b0 , \b Activation \b0 and on gun shooting \b Impact. \b0 Dust component should be used only as addition to Rigid component. If Rigid component Object type set to Mesh Root it will copy Dust component to every child as well.\par
+Dust componenet has a lot of similarities with Debris component and has no much video overviews, so you can check Debris video overviews to see how all preoperties affect to Dust behaviour.\fs24\lang1033\par
+\fs28\lang9\tab\fs24\lang1033\par
+\b\fs48\lang9\tab Emit Dust\b0\fs24\lang1033\par
+{\b\fs32\lang9{\field{\*\fldinst{HYPERLINK https://youtu.be/vD3a9hhIMJE }}{\fldrslt{https://youtu.be/vD3a9hhIMJE\ul0\cf0}}}}\f0\fs24\par
+\par
+\b\fs22\lang9 On Demolition\b0\lang1033 : Demolished object fragments will emit dust.\fs24\par
+\par
+\b\fs22\lang9 On Activation\b0\lang1033 : Activated object will emit dust.\fs24\par
+\par
+\b\fs22\lang9 On Impact\b0\lang1033 : Object will emit dustat the psotion when it was shot by RayFire Gun component.\fs24\par
+\par
+\par
+\b\fs48\lang9\tab Main\b0\fs24\lang1033\par
+\b\fs48\lang9\tab\b0\fs24\lang1033\par
+\b\fs22\lang9 Opacity\b0\lang1033 : Dust opacity.\fs24\par
+\par
+\b\fs22\lang9 Dust  Material\b0\lang1033 : Material with texture which will be used for dust.\par
+\par
+\b\lang9 Dust  Materials list\b0\lang1033 : List with Materials, every particle system will pick random material from this list..\fs24\par
+\par
+\b\fs22\lang9 Emission Material\b0\lang1033 : By default particle system will emit dust over whole object surface. You can define specific surface to emit dust using this Emission material field.\fs24\par
+\par
+\b\fs48\lang9\tab Properties\b0\fs24\lang1033\par
+\par
+\fs44\lang9 Pool\fs24\lang1033\par
+\b\fs28\lang9\tab\b0\fs24\lang1033\par
+\fs22\lang9 Every \b RayFire Dust \b0 components creates pool with Dust Particle System reference when \b Rigid \b0 or \b RigidRoot\b0  component initializes applied Dust components. When an object should emit Dust particles it \b instantiate \b0 this reference, but instancing Particle System every time is vert resourceful process, especially if you need tens or even hundreds of them.\par
+In order to avoid this, you can enable pooling and instantiate multiple amount of Particle Systems in advance. When object will need to emit Debris particles it will take them from the pool and after they will be stopped they will be returned to pool to be reused again later.\par
+\fs24\lang1033\par
+\b\fs22 Id\b0 : Allows set specific \b Pool Id \b0 for different RayFire \lang9 Dust \lang1033 components. \par
+In this way you can setup several different prefabs with the same RayFire \lang9 Dust \lang1033 component, when one of them will be Initialized it will create pool with \lang9 Dust \lang1033 particle system reference. In order to avoid creating separate pool for every prefab with RayFire \lang9 Dust \lang1033 component, you can set the same \b Id \b0 value for them so they will share the same pool if it is already created. Make sure that these \lang9 Dust \lang1033 components have the same properties because Particle Systems in the pool get properties from \lang9 Dust \lang1033 component which created this pool. \par
+\par
+
+\pard\box\brdrdash\brdrw0 \nowidctlpar\sl276\slmult1 It is possible to set new properties for all particle systems in RayFire \lang9 Dust \lang1033 component pool by using \cf2\b\f1\fs18 public void \cf0 EditEmitterParticles\cf3 ()\f2  \cf0\b0\f0\fs22 method after you changed some properties in Debris component. In Editor mode you can do the same using \b\f1\fs18 Edit\f2  \f1 Emitter\f2  \f1 Particles\f2  \b0\f0\fs22 button at the bottom of Pool properties during play mode.\cf3\f1\fs18\par
+
+\pard\nowidctlpar\sl276\slmult1\cf0\f0\fs22\par
+Default value 0 means that custom Pool Id is disabled. Also keep in mind that fragments of demolished object will share the same pool even if their Pool Id will be 0 because they get their Debris component copied from the original object.\fs24\par
+\par
+\b\fs22 Enable\b0 : Launches coroutine in RayFire Man which will instantiate Particle Systems in all created pools every frame until total amount will reach Capacity property value. This property can be changed in Play Mode.\par
+\par
+\b Warmup\b0 : Create Capacity value Particle Systems at Initalization.\fs24\par
+\par
+\b\fs22 Capacity\b0 : Maximum amount of particle Systems which RayFire Man will keep in pool. If there will be less than RayFire man will launch coroutine to fill this pool. This property can be changed in Play Mode.\par
+\par
+\b Rate\b0 : Amount of Particle Systems which will be instantiated at one frame to fill the pool. This property can be changed in Play Mode.\par
+\fs24\par
+\b\fs22 Skip\b0 : If Skip disabled and there are not enough Particle Systems in the pool then the rest of Particle Systems will be instantiated at one frame. In order to avoid FPS drop because of this, you can enable Skip property and only amount of Particle Systems that available at this moment will be used. This property can be changed in Play Mode.\par
+\par
+\b Reuse\b0 : If Reuse property is disabled then Particle System will be destroyed when it will be used and will stop. You can return such Particle Systems to pool to be reused again. This property can be changed in Play Mode.\fs24\par
+\par
+\b\fs22 Overflow\b0 : Amount of Particle Systems that will be allowed to get back to pool. For instance, if your Capacity property is 10 and Overflow property is 20, then after Initialization you will see 10 Particle Systems in the pool. When some of them will be used they will start getting back to pool until there will be 30 Particle Systems. This property can be changed in Play Mode.\par
+\fs24\par
+\par
+\fs44\lang9 Emission\fs24\lang1033\par
+\par
+\b\fs28\lang9\tab Burst\b0\fs24\lang1033\par
+\par
+\b\fs22 Burst Type\b0 : Defines how total amount of burst particles for every particle system will be calculated. \fs24\par
+
+\pard\nowidctlpar\li720\sl276\slmult1\tx720\f3\'b7\tab\b\f0\fs22\lang9 None\b0 : \lang1033 Object won't produce Burst particles, only Distance particles will be emitted.\fs24\par
+\f3\'b7\tab\b\f0\fs22 Amount Per Unit\b0 : Every fragment will emit burst particles accordingly to it's size measured by distance between Bounding Box Min and Max corners. For instance, if \b Burst Amount \b0 value set to 15 and object has size equal to 2 units it will emit 30 particles.\fs24\par
+\f3\'b7\tab\b\f0\fs22 Amount And Variation\b0 : Every fragment will emit particles equal to random vaue from \b Amount \b0 value property and \b Amount + Variation property \b0 value.\fs24\par
+
+\pard\nowidctlpar\li360\sl276\slmult1\par
+
+\pard\nowidctlpar\sl276\slmult1\b\fs22 Amount\b0 : Value which used by Burst Type to calculate final amount of particles which every object should emit\b\lang9 .\b0\fs24\lang1033\par
+\par
+\b\fs28\lang9\tab Distance\b0\fs24\lang1033\par
+\par
+\b\fs22 Rate\b0 : Defines amount of particles which should be emitted over one unit distance if object with particle system moves.\fs24\par
+\par
+\b\fs22 Duration\b0 : Defines duration of particles emitting by distance.\fs24\par
+\par
+\b\fs28\lang9\tab Lifetime\b0\fs24\lang1033\par
+\par
+\b\fs22 Life Min\b0 : Defines minimum time of particle system existence. Final life time will be in range between Min and Max values.\fs24\par
+\par
+\b\fs22 Life Max\b0 : Defines maximum time of particle system existence. \fs24\par
+\par
+\b\fs28\lang9\tab Size\b0\fs24\lang1033\par
+\par
+\b\fs22 Size Min\b0 : Defines minimum size of particle. Final size will be in range between Min and Max values. This value works as scale multiplier for debris reference.\fs24\par
+\par
+\b\fs22 Size Max\b0 : Defines maximum size of particle. \fs24\par
+\par
+
+\pard\nowidctlpar\li360\sl276\slmult1\par
+
+\pard\nowidctlpar\sl276\slmult1\fs44\lang9 Dynamic\fs24\lang1033\par
+\par
+\b\fs28\lang9\tab Speed\b0\fs24\lang1033\par
+\par
+\b\fs22 Speed Min\b0 : Defines minimum initial speed of particle. Final speed will be in range between Min and Max values.\fs24\par
+\par
+\b\fs22 Speed Max\b0 : Defines maximum initial speed of particle. \fs24\par
+\b\fs28\lang9\tab\par
+\tab Rotation\b0\fs24\lang1033\par
+\par
+\b\fs22 Rotation Speed\b0 : Defines particle rotation speed.\fs24\par
+\b\fs28\lang9\tab\par
+\tab Gravity Modifier\b0\fs24\lang1033\par
+\par
+\b\fs22 Gravity Min\b0 : Defines minimum gravity for particle system. Final gravity will be in range between Min and Max values.\fs24\par
+\par
+\b\fs22 Gravity Max\b0 : Defines maximum gravity for particle system.\fs24\par
+\b\fs28\lang9\tab\b0\fs24\lang1033\par
+\par
+\fs44\lang9 Noise\fs24\lang1033\par
+\fs22 Noise allows to add some turbulent move in particle velocity.\fs24\par
+{\b\fs32\lang9{\field{\*\fldinst{HYPERLINK https://youtu.be/jlJ_NrufFGU }}{\fldrslt{https://youtu.be/jlJ_NrufFGU\ul0\cf0}}}}\f0\fs24\par
+\par
+\b\fs28\lang9\tab Main\b0\fs24\lang1033\par
+\par
+\b\fs22 Enabled\b0 : Enables Noise.\fs24\par
+\par
+\b\fs22 Quality\b0 : Defines quality for Noise. \fs24\par
+\par
+\b\fs28\lang9\tab Strength\b0\fs24\lang1033\par
+\par
+\b\fs22 Strength Min\b0 : Defines minimum Noise strength for particle. Final Noise strength will be in range between Min and Max values.\fs24\par
+\par
+\b\fs22 Strength Max\b0 : Defines maximum Noise strength for particle. \fs24\par
+\b\fs28\lang9\tab\b0\fs24\lang1033\par
+\b\fs28\lang9\tab Other\b0\fs24\lang1033\par
+\par
+\b\fs22 Frequency\b0 : Defines how frequent will be turbulence.\fs24\par
+\par
+\fs44\lang9\tab Collision\fs24\lang1033\par
+\par
+\b\fs28\lang9\tab Common\b0\fs24\lang1033\par
+\par
+\b\fs22 Collides with\b0 : Defines how total amount of burst particles for every particle system will be calculated. \fs24\par
+
+\pard\nowidctlpar\li720\sl276\slmult1\tx720\f3\'b7\tab\b\f0\fs22\lang9 Everything\b0 : \lang1033 Object won't produce Burst particles, only Distance particles will be emitted.\fs24\par
+\f3\'b7\tab\b\f0\fs22\lang9 Nothing: \b0\lang1033 property value will be shared among all fragments. For instance, if \fs24\par
+
+\pard\nowidctlpar\sl276\slmult1\par
+\b\fs22 Quality\b0 : Defines how total amount of burst particles for every particle system will be \fs24\par
+
+\pard\nowidctlpar\li720\sl276\slmult1\tx720\f3\'b7\tab\b\f0\fs22\lang9 High\b0 : \lang1033 Object won't produce Burst particles, only Distance particles will be emitted.\fs24\par
+\f3\'b7\tab\b\f0\fs22\lang9 Medium: \b0\lang1033 property value will be shared among all fragments. For instance, if \fs24\par
+\f3\'b7\tab\b\f0\fs22\lang9 Low: \b0\lang1033 property value will be shared among all fragments. For instance, if \fs24\par
+
+\pard\nowidctlpar\sl276\slmult1\par
+\b\fs22 Radius Scale\b0 : Collision sphere radius multiplier.\fs24\par
+\b\fs28\lang9\tab\b0\fs24\lang1033\par
+\fs44\lang9\tab\fs24\lang1033\par
+\fs44\lang9 Limitations\fs24\lang1033\par
+\par
+\b\fs28\lang9\tab Particle system\b0\fs24\lang1033\par
+\par
+\b\fs22 Min Particles\b0 : Defines minimum amount of particles for particle system. If final amount of particles will be less than this value then particle system will not be created.\fs24\par
+\par
+\b\fs22 Max Particles\b0 : Defines maximum amount of particles for particle system. If final amount of particles will be higher than this values then particle system will be created but won't show more particles than \b Max Particles \b0 value.\fs24\par
+\par
+\b\fs28\lang9\tab Fragments\b0\fs24\lang1033\par
+\par
+\b\fs22 Percentage\b0 : Defines amount of fragments in percentage which will generate particle system.\fs24\par
+\par
+\b\fs22 Size Threshold\b0 : Defines minimum size in units for object to create particle system. If object size is less than this values then it won't create particle system. Using this property you can exclude very small objects from particle generation. \fs24\par
+\b\fs28\lang9\tab\b0\fs24\lang1033\par
+\fs44\lang9 Rendering\fs24\lang1033\par
+\b\fs28\lang9\tab\b0\fs24\lang1033\par
+\b\fs28\lang9\tab Shadows\b0\fs24\lang1033\par
+\par
+\b\fs22 Cast Shadow\b0 : Enables shadow casting for particles.\fs24\par
+\par
+\b\fs22 Receive Shadow\b0 : Enables shadow receiving for particles.\fs24\par
+\par
+\par
+\par
+}
+ 

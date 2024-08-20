@@ -1,0 +1,450 @@
+{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset1 Cambria Math;}{\f2\fnil\fcharset0 Arial Unicode MS;}{\f3\fnil\fcharset0 Consolas;}{\f4\fnil\fcharset2 Symbol;}}
+{\colortbl ;\red0\green0\blue255;\red0\green0\blue0;\red208\green208\blue208;}
+{\*\generator Riched20 10.0.19041}{\*\mmathPr\mmathFont1\mwrapIndent1440 }\viewkind4\uc1 
+\pard\sl276\slmult1\qc\highlight0\ul\b\f0\fs52\lang9 RayFire Rigid\par
+
+\pard\sl276\slmult1\par
+\ulnone\b0\fs22 It's main purpose is \b Advanced Physics Control\b0  and \b Runtime Demolitions\b0 . Using Rigid component you can demolish 3d objects into thousands of fragments and every fragment can be demolished further deeper and deeper.\par
+\par
+\b Initialization\b0 : Defines when an object will be initialized. Initialization adds all necessary components to the object, setup them accordingly to properties and start necessary coroutines.\par
+{\b\fs32{\field{\*\fldinst{HYPERLINK https://youtu.be/-wW9OfnhIh0 }}{\fldrslt{https://youtu.be/-wW9OfnhIh0\ul0\cf0}}}}\b\f0\fs32\par
+\par
+
+\pard\li720\sl276\slmult1\tx720\b0\f1\fs24\u8729?\f2\tab\b\f0\fs22 By Method\b0 : Object will be initialized by \b\i Initialize()\b0  \i0 method. This is the default initialization type. In this way you can add a Rigid component to objects in your code and they will not be initialized unless you will Initialize them as well. Object with \b ByMethod\b0  type can be initialized in Editor using the Initialize button on top of the Rigid component.\par
+\f1\fs24\u8729?\f2\tab\b\f0\fs22 At Start\b0 : Object will be initialized at Start.\par
+
+\pard\li360\sl276\slmult1\lang9\par
+
+\pard\sl276\slmult1 Object can be initialized using method:\par
+\cf1\f3\fs19 public\cf2  \cf1 void\cf2  Initialize()\par
+\cf0\f0\fs28\tab\par
+\b\fs48\tab Main\par
+\par
+\fs22 Simulation Type\b0 : Defines behavior of object during simulation.\par
+{\b\fs32{\field{\*\fldinst{HYPERLINK https://youtu.be/KZ8h9F45lkM }}{\fldrslt{https://youtu.be/KZ8h9F45lkM\ul0\cf0}}}}\b\f0\fs32\par
+\par
+
+\pard\li720\sl276\slmult1\tx720\b0\f1\fs24\u8729?\f2\tab\b\f0\fs22 Dynamic\b0 : Object will be affected by gravity, will start to fall down and it will be possible to affect on it by other simulated objects. \par
+\f1\fs24\u8729?\f2\tab\b\f0\fs22 Sleeping\b0 : Object will freeze in air until first collision with any other object, then it will start to behave as a Dynamic object.\par
+\f1\fs24\u8729?\f2\tab\b\f0\fs22 Inactive\b0 : Object will freeze in air and will not be affected by gravity, it can be affected by other simulated objects but it will not start to fall down until it will be activated. After activation the object will start to behave like a Dynamic object.\par
+\f1\fs24\u8729?\f2\tab\b\f0\fs22 Kinematic\b0 : Object will use it's animation to affect other objects but it will not be affected anyhow by any other object. Can use actual mesh as a collider.\par
+\f1\fs24\u8729?\f2\tab\b\f0\fs22 Static\b0 : Object will not be moved from it's position, it will interact with Dynamic objects but it will not be affected anyhow by any other object. Can use actual mesh as a collider.\par
+
+\pard\sl276\slmult1\lang9\par
+
+\pard\sl276\slmult1\qc\b ***\par
+
+\pard\sl276\slmult1\par
+Object Type\b0 : Rigid component can simulate a single object using it's mesh for simulation, but also it can simulate multiple objects as one concave object using all children meshes.\par
+{\b\fs32{\field{\*\fldinst{HYPERLINK https://youtu.be/fbVG1Y0RoBY }}{\fldrslt{https://youtu.be/fbVG1Y0RoBY\ul0\cf0}}}}\b\f0\fs32\par
+\par
+
+\pard\li720\sl276\slmult1\tx720\b0\f1\fs24\u8729?\f2\tab\b\f0\fs22 Mesh\b0 : Simulate object using its Meshfilter's mesh in Mesh Collider.\par
+\f1\fs24\u8729?\f2\tab\b\f0\fs22 Mesh Root\b0 : Should be added to the empty root with children with meshes. Add the same Rigid component to all children and simulate them as \b Mesh \b0 type. Root itself is not going to be simulated. Using this type you don't need to select every child to add Rigid components or to edit them later, you only need to edit all properties for Root.\par
+\f1\fs24\u8729?\f2\tab\b\f0\fs22 Skinned Mesh\b0 : Demolishes Skinned mesh object. Skinned Mesh objects can be demolished only by manually using the public method Demolish().\par
+\f1\fs24\u8729?\f2\tab\b\f0\fs22 Nested Cluster\b0 : Simulated object using all its children Meshfilter's meshes as one solid concave object. In this case root will get a Mesh Collider for every child with it's mesh. To Create such an object you need to add a Rigid component to the root which has all objects which you want to simulate as solid object as its children. In case of demolition Cluster will detach every child and start simulating them on their own. If a child is also just a root for other children with meshes after demolition it will be considered as a Nested Cluster as well. In this way you can demolish object in your own way.\par
+\f1\fs24\u8729?\f2\tab\b\f0\fs22 Connected Cluster\b0 : Simulated object using all its children Meshfilter's meshes as one solid concave object like Nested Cluster. It uses only children from the first layer, nesting is not allowed.  During demolition it will detach fragments at contact point while the rest of the fragments will stay as a solid cluster. At every demolition cluster checks itself for connectivity and if it detects that some groups of fragments are not connected together anymore they will start to simulate as separate Connected Clusters.\par
+
+\pard\sl276\slmult1\lang9\par
+
+\pard\sl276\slmult1\qc\b ***\par
+
+\pard\li360\sl276\slmult1\par
+
+\pard\sl276\slmult1 Demolition Type\b0 : Define when and how object will be demolished during Play mode. \par
+{\b\fs32{\field{\*\fldinst{HYPERLINK https://youtu.be/_aO08dcqBOQ }}{\fldrslt{https://youtu.be/_aO08dcqBOQ\ul0\cf0}}}}\b\f0\fs32\par
+\par
+
+\pard\li720\sl276\slmult1\tx720\b0\f1\fs24\u8729?\f2\tab\b\f0\fs22 None\b0 : Object will not be demolished.\par
+\f1\fs24\u8729?\f2\tab\b\f0\fs22 Runtime\b0 : Object will be demolished in Runtime. Fragments will be created at collision contact moment. It is better to use this type for low poly objects with low Fragments \b Amount \b0 value. Slowest speed among other types.\par
+\f1\fs24\u8729?\f2\tab\b\f0\fs22 Awake Precache\b0 : Object will precached all fragments mesh data in Awake and store all mesh data info in Rigid component. At collision contact gameobjects with all necessary components will be created and mesh will be assigned. \par
+\f1\fs24\u8729?\f2\tab\b\f0\fs22 Awake Prefragment\b0 : Object will be prefragmented in Awake. All fragments will be disabled and waiting for demolition. \par
+\f1\fs24\u8729?\f2\tab\b\f0\fs22 Reference Demolition\b0 : Allows to swap demolished object to predefined reference and demolish instance of this reference instead. Reference object could be FBX asset, prefab or other scene object.\par
+
+\pard\sl276\slmult1\qc\lang9\par
+
+\pard\sl276\slmult1\b\fs48\tab Simulation\par
+\par
+\b0\fs44\tab Physics\par
+{\b\fs32{\field{\*\fldinst{HYPERLINK https://youtu.be/MxMaPZLpLto }}{\fldrslt{https://youtu.be/MxMaPZLpLto\ul0\cf0}}}}\b\f0\fs32\par
+\par
+\fs28\tab Physic Material\par
+\par
+\fs22 Material Type\b0 : Material preset with predefined density, friction, elasticity and solidity. Can be edited in the Rayfire Man component.\par
+\par
+\b Material\b0 : Allows to define own \b Physic Material.\b0  Keep in mind that it still will define \b Material Type\b0  for \b Solidity \b0 and \b Mass\b0 .\par
+\par
+\b\fs28\tab Mass\par
+\par
+\fs22 Mass By\b0 : Allows to choose the way Mass will be applied to the RigidBody component.\par
+
+\pard\li720\sl276\slmult1\tx720\f1\fs24\u8729?\f2\tab\b\f0\fs22 Material Density\b0 : Object will get mass according to defined \b Material Type \b0 and mesh volume.\par
+\f1\fs24\u8729?\f2\tab\b\f0\fs22 Mass Property\b0 : Object will get mass by Mass property\par
+
+\pard\sl276\slmult1\b\lang9 Mass\b0 : RigidBody component will get this value if \b Mass By\b0  set to \b Mass Property.\par
+\par
+\fs28\tab Collider\par
+\par
+\fs22 Collider Type\b0 : Allows to choose automatic collider type for object if the object has no custom collider applied.\par
+
+\pard\li720\sl276\slmult1\tx720\f1\fs24\u8729?\f2\tab\b\f0\fs22 Mesh\b0 : Object will get Mesh Collider.\par
+\f1\fs24\u8729?\f2\tab\b\f0\fs22 Sphere\b0 : Object will Sphere Collider.\par
+\f1\fs24\u8729?\f2\tab\b\f0\fs22 Box\b0 : Object will get Box Collider.\par
+\f1\fs24\u8729?\f2\tab\b\f0\fs22 None\b0 : Object will not get an automatic collider.\par
+\lang9\par
+
+\pard\sl276\slmult1\b Planar Check\b0 : Do not add Mesh Collider to object with very small and/or planar mesh. Mesh Collider can't add the correct mesh collider to such meshes so applied mesh collider is always bigger than it should be and when such an object is positioned very close to other objects such collider will cause explosive simulations. Enable this property to avoid such simulation behaviour.\par
+\par
+\b Ignore Near\b0 : Allows to ignore all colliders around object if their bounding boxes overlap with each other. Enable if you have a lot of objects positioned close to each other so their convex mesh colliders overlap with each other which causes unstable simulation\b .\par
+\par
+\par
+\fs28\tab Other\par
+
+\pard\li360\sl276\slmult1\par
+
+\pard\sl276\slmult1\fs22 Use Gravity\b0 : Object will be affected by Gravity force. \par
+\par
+\b Solver Iterations\b0 : Defines Solver Iterations for objects Rigid Body component. \par
+\par
+\b\fs28\tab Fragments\par
+\par
+\fs22 Dampening\b0 : Decrease velocity of demolished fragments.\par
+
+\pard\li360\sl276\slmult1\par
+
+\pard\sl276\slmult1\i\fs44\tab Activation\par
+{\b\i0\fs32{\field{\*\fldinst{HYPERLINK https://youtu.be/t8JbxKyP91Y }}{\fldrslt{https://youtu.be/t8JbxKyP91Y\ul0\cf0}}}}\b\i0\f0\fs32\par
+\par
+\b0\fs22 Inactive object can be activated using public method:\par
+\cf1\f3\fs19 public\cf2  \cf1 void\cf2  Activate()\par
+\par
+\cf0\b\f0\fs22 By Velocity\b0 : Inactive object will be activated when it's velocity will be higher than \b By Velocity \b0 value when it was pushed by other dynamic objects. Turned Off when set to 0.\par
+\par
+\b By Offset\b0 : Inactive object will be activated if pushed from its original position farther than \b By Offset \b0 value. Turned Off when set to 0.\par
+\par
+\b By Damage\b0 : Inactive object will be activated if it's Current Damage will be higher than \b By Damage\b0  value. Turned Off when set to 0.\par
+\par
+\b By Activator\b0 : Inactive object will be activated by overlapping with object with \b RayFire Activator \b0 component.\par
+\par
+\b By Impact\b0 : Inactive object will be activated when it will be shot by \b RayFire Gun \b0 component.\par
+\par
+\b By Connectivity\b0 : Inactive object will be activated if it won't be able to reach any Inactive object with Unyielding property On through other Inactive objects. \b RayFire Connectivity \b0 components have to be used to establish connectivity between Inactive objects and activate them if they lose connection with other Inactive objects.\par
+\par
+\b\fs28\tab Connectivity\par
+\par
+\fs22 Unyielding\b0 : Allows to define Inactive/Kinematic object as Unyielding to check for connection with  other Inactive/Kinematic objects with enabled By Connectivity activation type.\par
+\par
+\b Activatable\b0 : Unyielding object can not be activated by default. When On allows to activate Unyielding objects as well.\par
+\par
+\b\fs28\tab Post Activation\par
+\par
+\fs22 Layer\b0 : Allows to set different Layer for activated object.\par
+\par
+\b\fs28\tab\par
+\fs48\tab Demolition\par
+\b0\fs22 Demolition can be initiated using method:\par
+\cf1\f3\fs19 public\cf2  \cf1 void\cf2  DemolishObject()\par
+\par
+\cf0\f0\fs22 Slicing by planes can be initiated by method:\par
+\cf1\f3\fs19 public\cf2  \cf1 void\cf2  AddSlicePlane(V\cf0\fs18 ector3[] slicePlane\cf2\fs19 )\par
+V\cf0\fs18 ector3[] slicePlane \f0\fs22 is array with slicing planes info: \par
+(plane position, plane normal, plane position, plane normal, etc...)\par
+\par
+\i\fs44\tab Limitations\par
+{\b\i0\fs32{\field{\*\fldinst{HYPERLINK https://youtu.be/ITYShtaF5cQ }}{\fldrslt{https://youtu.be/ITYShtaF5cQ\ul0\cf0}}}}\b\i0\f0\fs32\par
+\par
+\fs28\tab Collision\par
+\par
+\fs22 By Collision\b0 : Enables demolition by collision.\par
+\par
+\b Solidity\b0 : Local Object solidity multiplier for object. Low Solidity makes object more fragile. Keep in mind that every \b Material Type \b0 in \b Physics \b0 group also has its own Solidity. Set to 0 if you want an object to be demolished at first contact.\par
+\par
+\b Tag\b0 : Allows to set specific Tag so object with Rigid will be demolished by collision only when collides with object with defined Tag.\par
+\par
+\b\fs28\tab Other\par
+\par
+\fs22 Depth\b0 : Defines how deep object can be demolished. Depth is limitless if set to 0.\par
+\i\tab Example\i0 : \b Max Depth \b0 set to 1, it means that object can be demolished one time and \tab new fragments (Depth level 1 fragments) will not be possible to demolish anymore. \par
+\tab If \b Max Depth \b0 set to 2, it means that object can be demolished one time and new \tab fragments (Depth level 1 fragments) will possible to demolish one time, but new \tab fragments (Depth level 2 fragments) will not be possible to demolish anymore. Etc\par
+\par
+\b Time\b0 : Safe time. Measures in seconds and allows to prevent fragments from being demolished right after they were just initialized.\par
+\i\tab Example\i0 : \b Time \b0 set to 3 seconds, it means that object can be demolished and \tab new \tab fragments will not be demolished for sure during the next 3 seconds.\par
+\par
+\b Size\b0 : Prevent objects with bounding box size less than defined value to be demolished. Measures in units.\par
+\par
+\b Visible\b0 : Prevent object from being demolished if they are not visible by the main camera..\par
+\par
+\b Slice by Blade\b0 : Allows object to be sliced by object with \b RayFire Blade \b0 component. Keep in mind that collider of sliced object should fit mesh, otherwise Blade object may detect collision enter or exit with such collider and initiate slice outside of the mesh which may cause RFShatter warning messages and/or sliced fragments with artifacts.\par
+\par
+\i\fs44\tab Mesh Demolition\par
+\i0\fs28\tab\par
+\tab\b Fragments\par
+\par
+{\fs32{\field{\*\fldinst{HYPERLINK https://youtu.be/TpTHstzzvRU }}{\fldrslt{https://youtu.be/TpTHstzzvRU\ul0\cf0}}}}\f0\fs32\par
+\par
+\fs22 Amount\b0 : Defines amount of new fragments after demolition.\par
+\par
+\b Variation\b0 : Defines additional amount variation for object in percents. Final amount will always be higher than \b Amount \b0 value.\par
+\i\tab Example\i0 : Amount set to 50, Variation set to 10 %. Final amount will be randomly picked \tab in the range from 50 to 55. \par
+\par
+\b Depth Fade\b0 : Amount multiplier for next Depth level. Allows to decrease fragments amount of every next demolition level.\par
+\i\tab Example\i0 : \b Amount \b0 set to 100. \b Depth Fade \b0 set to 0.5. Object demolishes to 100 \tab fragments. For every fragment it's \b Amount \b0 for next demolition will be set to 50 (100 * \tab 0.5). Let's say some fragment demolishes to 50 fragments. For every fragment among \tab these 50 fragments it's \b Amount \b0 for next demolition will be set to 25 (50 * 0.5). \par
+\par
+\b Contact Bias\b0 : Higher value allows to create more tiny fragments closer to collision contact point and bigger fragments far from it. This is the property which makes the player understand that Runtime demolition happened right now and nothing was prefragmented before.\par
+\par
+\b Seed\b0 : Defines Seed for fragmentation algorithm. Same Seed will produce the same fragments for the same object every time.\par
+\par
+\b Use Shatter\b0 : Allows to use RayFire Shatter properties for fragmentation. Works only if the object has a RayFire Shatter component. This is the only way to create other Fragmentation types in runtime because default demolition fragmentation type produce only regular Voronoi fragments.\par
+\par
+\b\fs28\tab Advanced\par
+\par
+\fs22 Clusterize\b0 : Allows to turn demolition fragments to Connected Cluster.\par
+\par
+\b Mesh Input\b0 : Allows to choose when demolished mesh should be processed for fragmentation. Processing takes about 10% - 15% of total fragmentation time. \par
+
+\pard\li720\sl276\slmult1\tx720\f1\fs24\u8729?\f2\tab\b\f0\fs22 At Start\b0 : Mesh will be processed at Start.\par
+\f1\fs24\u8729?\f2\tab\b\f0\fs22 At Initialization\b0 : Mesh will be processed at Initialization.\par
+\f1\fs24\u8729?\f2\tab\b\f0\fs22 At Demolition\b0 : Mesh will be processed at Demolition.\par
+
+\pard\sl276\slmult1\lang9\par
+\i\fs36\tab Properties\par
+\par
+\i0\fs28\tab\b Collider\par
+\par
+\fs22 Collider Type\b0 : Defines Collider type for mesh fragments if their bounding box size is less than \b Size Filter \b0 value. Useful in case you want to apply simple colliders for a lot of small fragments. \par
+\par
+\b Size Filter\b0 : Defines Bounding Box size value for Collider Type property. Turned Off if set to 0.\par
+\par
+\fs28\tab\b Mesh Ops\par
+\par
+\fs22 Decompose\b0 : Decompose output fragment's mesh to several meshes if they are not connected with each other.\par
+\par
+\b Remove Collinear\b0 : Remove collinear vertices on output fragment's mesh.\par
+\par
+\fs28\tab\b Custom Layer\par
+\par
+\fs22 Layer\b0 : Set custom Layer to fragments.\par
+\par
+\fs28\tab\par
+\i\fs36\tab Runtime Caching\par
+{\b\i0\fs32{\field{\*\fldinst{HYPERLINK https://youtu.be/RF-srUHcy0g }}{\fldrslt{https://youtu.be/RF-srUHcy0g\ul0\cf0}}}}\b\i0\f0\fs32\par
+\par
+\fs22 Type\b0 : Defines Runtime Caching type. Disabled by default.\par
+
+\pard\li720\sl276\slmult1\tx720\f1\fs24\u8729?\f2\tab\b\f0\fs22 By Frames\b0 : Cache fragment's meshes over defined amount of frames.\par
+\f1\fs24\u8729?\f2\tab\b\f0\fs22 By Fragments per Frame\b0 : Cache defined amount of fragment's meshes every frame.\par
+
+\pard\li360\sl276\slmult1\lang9\par
+
+\pard\sl276\slmult1\b Frames\b0 : Defines amount of frames for \b By Frames \b0 type.\par
+\par
+\b Fragments\b0 : Defines amount of fragments for \b By Fragments per Frame \b0 type.\par
+\par
+\b Skip First Demolition\b0 : Do not demolish object when all meshes were cached and wait for the next demolition. Allows to use first Demolition to initiate caching and demolish object only at second demolition.\par
+\par
+\par
+\i\fs44\tab Cluster Demolition\par
+{\b\i0\fs32{\field{\*\fldinst{HYPERLINK https://youtu.be/fNFG4SGWuQQ }}{\fldrslt{https://youtu.be/fNFG4SGWuQQ\ul0\cf0}}}}\b\i0\f0\fs32\par
+{{\field{\*\fldinst{HYPERLINK https://youtu.be/ZuHq1OFylnM }}{\fldrslt{https://youtu.be/ZuHq1OFylnM\ul0\cf0}}}}\f0\fs32\par
+\par
+\b0\fs28\tab\b Properties\par
+\par
+\fs22 Connectivity\b0 : Define the way connections among Shards will be calculated. \par
+\f1\fs24\u8729?\f2\tab\b\f0\fs22 By Bounding Box\b0 : Shards will be considered as connected if their bound boxes interpenetrate with each other. This is the fastest way to establish connectivity and can be used in Runtime, but calculated shared area value will not be precise and will be based on shard's size.\par
+\f1\fs24\u8729?\f2\tab\b\f0\fs22 By Mesh\b0 : Shards will be considered as connected if the triangle of one Shard fits the triangle of neighbor shard. This is the slowest way to establish connectivity and should be used only in Editor with Setup Cluster button, but it precisely calculates shared area value which provides realistic Collapse By Area.\par
+\f1\fs24\u8729?\f2\tab\b\f0\fs22 By Bounding Box and Mesh\b0 : Shards will be considered as connected if their bound boxes interpenetrate with each other. If Shards also share triangles then the Shared area will be calculated using By Mesh method, if shards do not share triangles then By Bounding Box method will be used.\par
+\lang9\par
+\tab\b\fs28 Filters\par
+\par
+\b0\fs22 Filters allow you to decrease the amount of connections. There are three filters and they are turned off by default.\par
+\par
+\b Minimum Area\b0 : Two shards will have connection if their shared area is bigger than this value.\par
+\b Minimum Size\b0 : Two shards will have connection if their size is bigger than this value.\par
+\b Percentage\b0 : Random percentage of connections will be discarded.\par
+\b Seed\b0 : Seed for random percentage filter and for Random Collapse.\par
+\par
+\b\fs28\tab Demolition Distance\par
+\par
+\b0\fs22 When a Connected Cluster collides with something or gets Impact from Gun and should be demolished at contact point it has to decide how much Shards should be detached into separate fragments, all Shards in \b Demolition Distance \b0 radius from contact point will be detached. \par
+Then the rest of the Shards will check for connectivity with each other and if there are several groups of Shards which are connected only with each other then such groups will be simulated as separate Connected Clusters.\par
+\par
+\b Type\b0 : Defines the way Demolition Distance will be measured. \par
+\f1\fs24\u8729?\f2\tab\b\f0\fs22 Ratio To Size\b0 : Measured in percentage relative to initial cluster size. \par
+\lang9 For instance, if cluster size is 50 units and Ratio To Size value is 20% then Demolition Distance radius will be 10 units and all Shards in 10 Units radius around contact point will be detached from cluster.\par
+\f1\fs24\u8729?\f2\tab\b\f0\fs22 World Units\b0 : Measured in world Units.\par
+\lang9\par
+\b Ratio\b0 : Percentage value for Demolition Distance.\par
+\par
+\b Units\b0 : World Units value for Demolition Distance.\par
+\par
+\b\fs28\tab Shards\par
+\par
+\b0\fs22 All detached Shards in the Demolition Distance area will get RayFire Rigid Component with Mesh object type and will be simulated separately. All such Shards will inherit Mesh Demolition properties from the initial Connected Cluster Rigid. But it is possible to clusterize these detached Shards into small Connected Clusters, thanks to this you can create a smooth transition between Initial demolished Connected Cluster to separate detached SHards so between them there will be small groups of Connected Clusters. \par
+\par
+\b Shard Area\b0 : Defines percentage relative to Demolition Distance. \par
+For instance, Cluster size is 50 units, Demolition Distance is 20 units, so all Shards in 20 units radius around contact point will be detached from demolished connected cluster. If Shard Area value is 100% then all Shards will be simulated separately as Rigid with Mesh object type, if Shards Area value is 25% then only Shards in 5 units radius around contact point will be simulated separately and the rest of the Shards from 5 to 20 units radius will be divided into groups and every group will be simulated as small Connected Cluster. Amount of such groups can be defined using Min and Max Amount properties in the Cluster section.\par
+\par
+\b Shard Demolition\b0 : Set Runtime demolition type for detached Shards with Mesh object type.\par
+\par
+\b\fs28\tab Clusters\par
+\par
+\fs22 Min Amount\b0 : Defines minimum amount of Connected Clusters which will be created inside Demolition Distance radius.\par
+\par
+\b Max Amount\b0 : Defines maximum amount of Connected Clusters which will be created inside Demolition Distance radius. Final value will be picked randomly between Min and Max range.\par
+\par
+\b Demolishable\b0 : Set Runtime demolition type for created Connected Clusters so it will be possible to demolish them as well.\par
+\par
+\par
+\b\fs28\tab Collapse\par
+\par
+\fs22 Type\b0 : There are three ways to break connections among Shards. You should try in Editor all of them to find the one which looks better for your structure and your goal.  \par
+\f1\fs24\u8729?\f2\tab\b\f0\fs22 By Area\b0 : Shard will lose its connections if it's shared area surface is less than defined value.\par
+\f1\fs24\u8729?\f2\tab\b\f0\fs22 By Size\b0 : Shard will lose its connections if it's Size is less then defined value.\par
+\f1\fs24\u8729?\f2\tab\b\f0\fs22 Random\b0 : Shard will lose its connections if it's random value in range from 0 to 100 is less than the defined value.\par
+\lang9\par
+\b Start\b0 : Defines start value in percentage relative to the whole range of picked type. For instance, Type set to By Size, you have 200 shards with the smallest shard size equal to 0.1 unit and biggest shard size equal to 50 units. If you set \b Start \b0 value to 50% it will start to collapse by setting By Size threshold value to 25 units and all shards with size less than 25 units will lose their connections. Increase this value if you want to Start Collapse quickly so a lot of shards will lose connections and will be activated right from the beginning. Set it to 0 if you want to start collapse slowly activating shards one by one.\par
+\par
+\b End\b0 : Defines end value in percentage relative to the whole range of picked type. Set tp 100 if you want to break all connections or set it lower if you want to keep some connections.\par
+\par
+\b Steps\b0 : Amount of times when defined threshold value will be set during the Duration\b  \b0 period. \par
+\par
+\b Duration\b0 : Time which will take \b Start \b0 value to be increased to \b End \b0 value\b .\par
+\par
+\b0\i\fs44\tab Reference Demolition\par
+\i0\fs22 Using Reference Demolition type you can swap demolished object to another Gameobject in scene, Prefab asset, FBX asset or even custom Particle System with your own scripts. This demolition type can be used for fragments which you just created using the Shatter component or for FBX asset with fragments which you imported from another 3d package.\par
+If Reference is just one object then at demolition it will be demolished instead of original object. \par
+If Reference is an empty root with children then these children will be simulated as fragments.\par
+It is also possible to keep the Reference field empty so the original demolished object will disappear without leaving anything instead. \par
+\par
+{\b\fs32{\field{\*\fldinst{HYPERLINK https://youtu.be/CtY4w16357Q }}{\fldrslt{https://youtu.be/CtY4w16357Q\ul0\cf0}}}}\b\f0\fs32\par
+\par
+\par
+\b0\fs28\tab\b Source\par
+\par
+\fs22 Reference\b0 : Defines reference for demolition. Reference will be instantiated and demolished instead of the original object.\par
+\par
+\b Random List\b0 : Allows to define several references and pick for demolition one random.\par
+\par
+\fs28\tab\b Properties\par
+\par
+\fs22 Action\b0 : Defines how source object should be used.  \par
+
+\pard{\pntext\f4\'B7\tab}{\*\pn\pnlvlblt\pnf4\pnindent360{\pntxtb\'B7}}\fi-360\li720\sl276\slmult1\b Instantiate\b0 : Instantiate Source objects and use instance.\fs24\par
+{\pntext\f4\'B7\tab}\b\fs22 Set Active\b0 : Activate Source object and use it for demolition.\fs24\par
+
+\pard\sl276\slmult1\fs22\par
+\par
+\b Add Rigid\b0 : All references without Rigid Component will get it automatically. Single Object will get Mesh Object Type, Roots with a group of mesh objects will get Mesh Root object type.\par
+\par
+\b Inherit Scale\b0 : Instantiated reference will inherit original object scale.\par
+\par
+\i\fs44\tab Materials\par
+{\b\i0\fs32{\field{\*\fldinst{HYPERLINK https://youtu.be/2Aqdzt58xw0 }}{\fldrslt{https://youtu.be/2Aqdzt58xw0\ul0\cf0}}}}\b\i0\f0\fs32\par
+\par
+\fs28\tab Inner surface\par
+\par
+\fs22 Inner material\b0 : Defines material for fragment's inner surface. If not applied RayFire will use original object material for the inner surface.\par
+\par
+\b Mapping Scale\b0 : Defines mapping scale for inner surface. Using this property you can increase or decrease the size of texture for the inner surface.\par
+\b\fs28\tab\par
+\tab Outer surface\par
+\par
+\fs22 Outer material\b0 : Defines material for fragment's.\par
+\par
+\i\fs44\tab Damage\par
+{\b\i0\fs32{\field{\*\fldinst{HYPERLINK https://youtu.be/WfoaziBQiGU }}{\fldrslt{https://youtu.be/WfoaziBQiGU\ul0\cf0}}}}\b\i0\f0\fs32\par
+\par
+\fs22 Enable\b0 : Allows to demolish object by its own floating Damage value. Object will be demolished when Current Damage value will be more or equal Max Damage value. Current Damage value can be increased by RayFireBomb and RayFireGun components, by Collision or by public method:\par
+\par
+\i\f3\fs20\tab\cf1\i0\fs19 public\cf2  \cf1 bool\cf2  ApplyDamage(\cf1 float\cf2  damageValue, Vector3 damagePosition)\par
+\par
+\i\f0\fs22 damagePosition: P\i0 osition in world space. In this \cf0 case the damage\cf2  position will be used by Contact Bias to create more tiny fragments \cf0 at the damaged\cf2  area. \par
+True boolean return value means \cf0 the\cf2  object was demolished because of applied damage.\par
+\par
+\cf0\b Max Damage\b0 : Defines maximum allowed damage for an object before it will be demolished.\par
+\par
+\b Current Damage\b0 : Shows current damage value.\par
+\par
+\b\fs28\tab Collisions\par
+\par
+\fs22 Collect \b0 : Allows to accumulate damage value by collisions during dynamic simulation.\par
+\par
+\b Multiplier\b0 : Multiply collected collision damage.\par
+\b\fs32\tab\par
+\b0\i\fs44\tab Fading\par
+{\b\i0\fs32{\field{\*\fldinst{HYPERLINK https://youtu.be/wYFPii-pAuY }}{\fldrslt{https://youtu.be/wYFPii-pAuY\ul0\cf0}}}}\b\i0\f0\fs32\par
+\par
+\fs28\tab Initiation\par
+\par
+\fs22 On Demolition\b0 : Initiate Fading for demolished object fragments.\par
+\par
+\b On Activation\b0 : Initiate Fading when objects Activated (change Inactive simulation type to Dynamic) \par
+\par
+\b By Offset\b0 : Initiate Fading when objects moved far enough from it's Initialise position. \par
+\par
+\b\fs28\tab Life\par
+\par
+\fs22 Life Type\b0 : Defines time while objects will be simulated before object will start to fade.  \par
+
+\pard{\pntext\f4\'B7\tab}{\*\pn\pnlvlblt\pnf4\pnindent360{\pntxtb\'B7}}\fi-360\li720\sl276\slmult1\b By Life Time\b0 : Life time timer starts right after Fading was initiated and equal to \b Life Time \b0 property value.\fs24\par
+{\pntext\f4\'B7\tab}\b\fs22 By Life Time and Simulation\b0 : Life time timer starts when objects stop simulation and do not move for a few seconds, then Life Time timer starts.\fs24\par
+
+\pard\sl276\slmult1\fs22\par
+\b Life Time\b0 : Minimum  period of time in seconds during which fragments created by demolition or slicing will be simulated.\par
+\par
+\b Life Variation\b0 : Add random period of time in seconds to final \b Life Time.\par
+\par
+\fs28\tab Fade\par
+\par
+\fs22 Fade Type\b0 : Fading lets you keep your scene clean and optimize dynamic simulation by destroying fragments  or excluding  them from simulation. \par
+
+\pard{\pntext\f4\'B7\tab}{\*\pn\pnlvlblt\pnf4\pnindent360{\pntxtb\'B7}}\fi-360\li1440\sl276\slmult1\tx720\b None\b0 : Fragments will stay in the scene with no limitation and they always will be simulated.\fs24\par
+{\pntext\f4\'B7\tab}\b\fs22 Sim Exclude\b0 : Fragments will be simulated for\b  Life Time \b0 period after their birth, then  their Colliders and RigidBody components will be destroyed. \fs24\par
+{\pntext\f4\'B7\tab}\b\fs22 Fall Down\b0 : Fragments will be simulated for \b Life Time \b0 period after their birth, then they will fall through the ground and will be destroyed after \b Fade Time \b0 period. \fs24\par
+{\pntext\f4\'B7\tab}\b\fs22 Scale Down\b0 : Fragments will be simulated for \b Life Time \b0 period after their birth, then they will start slowly scaling to nothing during the Fade\b  Time \b0 period and be destroyed after all.\fs24\par
+{\pntext\f4\'B7\tab}\b\fs22 Move Down\b0 : Fragments will be simulated for \b Life Time \b0 period after their birth, then they will move through the ground to the distance equal to their size and will be destroyed after \b Fade Time \b0 period. \fs24\par
+{\pntext\f4\'B7\tab}\b\fs22 Destroy: \b0 Fragments will be simulated for \b Life Time \b0 period after their birth and destroyed instantly.\fs24\par
+{\pntext\f4\'B7\tab}\b\fs22 Set Static\b0 : Fragments will be simulated for \b Life Time \b0 period after their birth, then Destroy Rigid Body component and leave Collider.\fs24\par
+{\pntext\f4\'B7\tab}\b\fs22 Set Kinematic\b0 : Fragments will be simulated for \b Life Time \b0 period after their birth, then Rigid Body component will be set to Kinematic.\fs24\par
+
+\pard\sl276\slmult1\fs22\par
+\b Fade Time\b0 : Period of time in seconds during which an object slowly moves through the ground or scales down to nothing.\par
+\par
+\b Size FIlter\b0 : Prevent object for fading if it's size is bigger than defined value. Turned Off if 0.\par
+\par
+\par
+\i\fs44\tab Reset WIP\par
+{\b\i0\fs32{\field{\*\fldinst{HYPERLINK https://www.youtube.com/watch?v=6h94gd_gDrY }}{\fldrslt{https://www.youtube.com/watch?v=6h94gd_gDrY\ul0\cf0}}}}\b\i0\f0\fs32\par
+\par
+\b0\i\fs44\tab\par
+\tab Events\par
+{\b\i0\fs32{\field{\*\fldinst{HYPERLINK https://youtu.be/lRlqcHGA1sI }}{\fldrslt{https://youtu.be/lRlqcHGA1sI\ul0\cf0}}}}\b\i0\f0\fs32\par
+\par
+\b0\fs22 RayFire Rigid component provides subscription to \b Demolition \b0 and \b Activation \b0 events.\par
+\par
+Subscription to \b Global \b0 event will invoke subscribed method when any demolition happens.\par
+\par
+\b Global Demolition \b0 event subscription reference\b : \cf3\b0\f3\fs18  \par
+\cf0\b\tab\b0 RFDemolitionEvent.GlobalEvent += MyMethod;\par
+\par
+\b\f0\fs22 Global Activation \b0 event subscription reference\b : \cf3\b0\f3\fs18  \par
+\cf0\b\tab\b0 RFActivationEvent.GlobalEvent += MyMethod;\par
+\par
+\f0\fs22 Subscription to \b Local \b0 event will invoke subscribed method when demolition of specific Rigid script happens and because of this you need to have reference to Rigid component you want to track. \par
+\par
+\b Local Demolition \b0 event subscription reference\b : \cf3\b0\f3\fs18  \par
+\tab\cf0 GameObject myGameObject = GameObject.Find("MyObjectWithRigidComponent");\par
+\tab RayfireRigid rigid = myGameObject.\b GetComponent\b0 <RayfireRigid>();\line\tab rigid.demolitionEvent.LocalEvent += MyMethod;\par
+\par
+\b\f0\fs22 Local Activation \b0 event subscription reference\b : \cf3\b0\f3\fs18  \par
+\tab\cf0 GameObject myGameObject = GameObject.Find("MyObjectWithRigidComponent");\par
+\tab RayfireRigid rigid = myGameObject.\b GetComponent\b0 <RayfireRigid>();\line\tab rigid.activationEvent.LocalEvent += MyMethod;\par
+\par
+\f0\fs22 Keep in mind that \f3\fs18 MyMethod\f0\fs22  should have RayFireRigid component as input, in this way you can get access to all public variables of Rigid component, for instance:\par
+
+\pard\li720\sl276\slmult1\f3\fs18 void MyMethod(RayfireRigid rigid)\line\b\{\line     \b0 Debug.Log(rigid.\i fragments\i0 .\i Count\i0 );\line\}\par
+
+\pard\sl276\slmult1\f0\fs22 will show in console the amount of fragments which were created as a result of demolition.\par
+\par
+}
+ 

@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ManusVR_Workglove_Left
+  m_Shader: {fileID: 4800000, guid: 351f16a1ec94c8c458ab586953109a89, type: 3}
+  m_ShaderKeywords: _DETAIL_MULX2 _FLIPPRINT_ON _METALLICGLOSSMAP _NORMALMAP
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _Albedo:
+        m_Texture: {fileID: 2800000, guid: f6ba355e8d17c80498f0e9491d74a86d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ColorMask4:
+        m_Texture: {fileID: 2800000, guid: 3148b6a82a6a64c43a5fc22188c50e9d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Masks:
+        m_Texture: {fileID: 2800000, guid: dc143242ddf07b54ab6e09cdf0ee3bbc, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Normal:
+        m_Texture: {fileID: 2800000, guid: 902454e7d0bdcdf459865bce49542c00, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Print:
+        m_Texture: {fileID: 2800000, guid: e02744390f6d909408fadaf8d77696d3, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _RMAO:
+        m_Texture: {fileID: 2800000, guid: b4347c8a1ce62694d8b6abf3494ef1b4, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _FlipPrint: 1
+    m_Colors:
+    - _FabricHandColor: {r: 1, g: 1, b: 1, a: 1}
+    - _FabricWristAccentColor: {r: 0.96862745, g: 0.94509804, b: 0, a: 1}
+    - _FabricWristColor: {r: 0.8676471, g: 0.8676471, b: 0.8676471, a: 1}
+    - _RuberizedGripColor: {r: 0.6196079, g: 0.6196079, b: 0.6196079, a: 1}
