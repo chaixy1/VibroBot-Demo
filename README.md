@@ -136,7 +136,7 @@ For a step-by-step video guide on setting up and using VibroBot, please watch th
 [Watch the setup and usage tutorial on YouTube](https://www.youtube.com/watch?v=6eU5iwbdGzk&t=22s)
 
 ## License
-This project is licensed under the [LICENSE NAME] - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT - see the [LICENSE](LICENSE) file for details.
 
 ## Acknowledgments
 - Special thanks to Google for the MediaPipe hand recognition algorithm.
