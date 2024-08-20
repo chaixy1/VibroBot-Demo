@@ -47,7 +47,7 @@ To install and set up the VibroBot Gesture Guidance System, follow these steps c
 - Adjust any network or other system settings as required.
 
 
-## Usage
+## :plate_with_cutlery: Usage
 Follow these steps to use the VibroBot Gesture Guidance System effectively.
 ### Start the System
 1. **Run the Main Application**
@@ -135,9 +135,9 @@ For a step-by-step video guide on setting up and using VibroBot, please watch th
 
 [Watch the setup and usage tutorial on YouTube](https://www.youtube.com/watch?v=6eU5iwbdGzk&t=22s)
 
-## License
+## :scroll: LICENSE
 This project is licensed under the MIT - see the [LICENSE](LICENSE) file for details.
 
-## Acknowledgments
+## :book: Acknowledgments
 - Special thanks to Google for the MediaPipe hand recognition algorithm.
 - Acknowledgment to all contributors and testers of the VibroBot system.
