@@ -3,14 +3,14 @@
 ## Overview
 The VibroBot Gesture Guidance System is an innovative real-time gesture guidance system designed to assist users, particularly those with limited vision, in performing precise hand gestures for virtual scenarios. By utilizing five VibroBots worn on each finger, the system provides haptic feedback to guide users through the process of learning and perfecting grab actions.
 
-## Key Features
+## ⭐ Key Features
 - **Real-time Gesture Recognition**: Captures and processes hand gestures at 30 frames per second.
 - **Wireless Connectivity**: Interconnects components via a wireless local area network.
 - **MediaPipe Integration**: Leverages Google’s open-source hand recognition for accurate joint positioning.
 - **Haptic Feedback**: VibroBots provide real-time guidance through vibration modes.
 - **Color-coded Error Representation**: Visual feedback indicates areas needing improvement.
 
-## ::System Components
+## 🧰 System Components
 - **Camera**: Captures the user's hand gestures.
 - **Virtual Scene**: Displays real-time gesture data and error analysis.
 - **VibroBots**: Wearable devices that vibrate to guide finger positioning.
@@ -129,7 +129,7 @@ Follow these steps to perform the Grab demo using the Unity application:
 6. **Restart the Demo**
    - To perform the demo again, click the `restart` button to reset the scene and begin a new attempt.
 
-## 🎞️ : Video Tutorial
+## 🎞️ Video Tutorial
 
 For a step-by-step video guide on setting up and using VibroBot, please watch the tutorial below:
 
